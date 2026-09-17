@@ -13,7 +13,8 @@
     <!-- Font Awesome 6.5.1 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Tailwind CSS CDN -->
+    <!-- Basecoat UI CSS & Tailwind CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/basecoat-css@1.0.2/dist/basecoat.cdn.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Chart.js 4.4.1 -->

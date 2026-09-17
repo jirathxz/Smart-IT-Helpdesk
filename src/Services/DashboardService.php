@@ -68,10 +68,12 @@ class DashboardService
             'period_label'         => self::getPeriodLabel($period),
             'kpi' => [
                 'total_tickets'    => $totalTickets,
+                'open_pending'     => $openPending,
                 'open_tickets'     => $openPending,
                 'in_progress'      => $inProgress,
                 'resolved'         => $resolved,
                 'urgent'           => $urgent,
+                'csat_rating'      => $this->getAvgRating($where),
                 'resolution_rate'  => $resolutionRate,
                 'avg_resolution'   => $avgResolutionFormatted,
                 'avg_rating'       => $this->getAvgRating($where),
