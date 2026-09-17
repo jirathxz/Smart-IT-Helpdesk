@@ -98,7 +98,7 @@ class Router
                 // Dispatch handler
                 $handler = $route['handler'];
                 if (is_callable($handler)) {
-                    call_user_func_array($handler, $params);
+                    call_user_func_array($handler, array_values($params));
                     return;
                 }
 
@@ -107,7 +107,7 @@ class Router
                     if (class_exists($class)) {
                         $controller = new $class();
                         if (method_exists($controller, $method)) {
-                            call_user_func_array([$controller, $method], $params);
+                            call_user_func_array([$controller, $method], array_values($params));
                             return;
                         }
                     }
