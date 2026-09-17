@@ -2,37 +2,45 @@
     <!-- Header -->
     <div class="flex items-center justify-between">
         <div>
-            <h1 class="text-2xl font-extrabold text-white tracking-tight">เปิดตั๋วแจ้งซ่อม / ปัญหาใหม่</h1>
-            <p class="text-sm text-slate-400 mt-1">กรอกรายละเอียดอุปกรณ์และปัญหาเพื่อให้เจ้าหน้าที่เข้าดำเนินการ</p>
+            <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2.5">
+                <i class="fa-solid fa-circle-plus text-blue-600 text-xl"></i>
+                <span>เปิดตั๋วแจ้งซ่อม / ปัญหาใหม่</span>
+            </h1>
+            <p class="text-sm text-slate-500 mt-1">กรอกรายละเอียดอุปกรณ์และปัญหาเพื่อให้เจ้าหน้าที่เข้าดำเนินการ</p>
         </div>
-        <a href="/tickets" class="text-xs text-slate-400 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800 transition-all">
-            &larr; ยกเลิก
+        <a href="/tickets" class="text-xs font-medium text-slate-600 hover:text-slate-900 px-3.5 py-2 rounded-xl bg-white border border-slate-200 hover:bg-slate-50 transition-all flex items-center gap-1.5 shadow-sm">
+            <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            <span>ยกเลิก</span>
         </a>
     </div>
 
     <!-- Form Card -->
-    <div class="p-6 sm:p-8 rounded-2xl bg-slate-900/80 border border-slate-800 shadow-xl">
+    <div class="p-6 sm:p-8 rounded-2xl bg-white border border-slate-200/90 shadow-sm">
         <form action="/tickets" method="POST" enctype="multipart/form-data" class="space-y-5">
             <?= \App\Core\Csrf::field() ?>
 
             <!-- Title -->
             <div>
-                <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                    หัวข้อปัญหา / อุปกรณ์ที่ชำรุด <span class="text-rose-500">*</span>
+                <label for="title" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-pen-to-square text-slate-400 text-xs"></i>
+                    <span>หัวข้อปัญหา / อุปกรณ์ที่ชำรุด</span>
+                    <span class="text-rose-500">*</span>
                 </label>
                 <input type="text" id="title" name="title" required placeholder="เช่น จอคอมพิวเตอร์แผนกบัญชีเปิดไม่ติด, Wi-Fi ชั้น 2 หลุดบ่อย" 
-                       class="w-full px-3.5 py-2.5 bg-slate-950/70 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500">
+                       class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/15 transition-all">
             </div>
 
             <!-- Two-col category and priority -->
             <div class="grid sm:grid-cols-2 gap-4">
                 <!-- Category -->
                 <div>
-                    <label for="category_id" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                        หมวดหมู่งานซ่อม <span class="text-rose-500">*</span>
+                    <label for="category_id" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-tags text-slate-400 text-xs"></i>
+                        <span>หมวดหมู่งานซ่อม</span>
+                        <span class="text-rose-500">*</span>
                     </label>
                     <select id="category_id" name="category_id" required 
-                            class="w-full px-3.5 py-2.5 bg-slate-950/70 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500">
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-blue-600 transition-all">
                         <option value="">-- เลือกหมวดหมู่ --</option>
                         <?php foreach ($categories as $cat): ?>
                             <option value="<?= $cat['id'] ?>"><?= htmlspecialchars($cat['name']) ?></option>
@@ -42,11 +50,13 @@
 
                 <!-- Priority -->
                 <div>
-                    <label for="priority" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                        ระดับความเร่งด่วน <span class="text-rose-500">*</span>
+                    <label for="priority" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                        <i class="fa-solid fa-gauge-high text-slate-400 text-xs"></i>
+                        <span>ระดับความเร่งด่วน</span>
+                        <span class="text-rose-500">*</span>
                     </label>
                     <select id="priority" name="priority" required 
-                            class="w-full px-3.5 py-2.5 bg-slate-950/70 border border-slate-800 rounded-xl text-sm text-white focus:outline-none focus:border-blue-500">
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-blue-600 transition-all">
                         <option value="low">ต่ำ (Low) - ไม่กระทบงาน</option>
                         <option value="medium" selected>ปานกลาง (Medium) - กระทบบางส่วน</option>
                         <option value="high">สูง (High) - ไม่สามารถทำงานได้</option>
@@ -57,34 +67,37 @@
 
             <!-- Description -->
             <div>
-                <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                    รายละเอียดอาการ / สถานที่ตั้งอุปกรณ์ <span class="text-rose-500">*</span>
+                <label for="description" class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-align-left text-slate-400 text-xs"></i>
+                    <span>รายละเอียดอาการ / สถานที่ตั้งอุปกรณ์</span>
+                    <span class="text-rose-500">*</span>
                 </label>
                 <textarea id="description" name="description" rows="4" required placeholder="อธิบายอาการอย่างละเอียด ระบุชั้น ห้อง หรือหมายเลขอุปกรณ์..." 
-                          class="w-full px-3.5 py-2.5 bg-slate-950/70 border border-slate-800 rounded-xl text-sm text-white placeholder-slate-500 focus:outline-none focus:border-blue-500"></textarea>
+                          class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-500/15 transition-all"></textarea>
             </div>
 
             <!-- Image Upload with Live Preview -->
             <div>
-                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-1.5">
-                    แนบรูปภาพอาการปัญหา (ไม่บังคับ - สูงสุด 5MB)
+                <label class="block text-xs font-semibold uppercase tracking-wider text-slate-700 mb-1.5 flex items-center gap-1.5">
+                    <i class="fa-solid fa-camera text-slate-400 text-xs"></i>
+                    <span>แนบรูปภาพอาการปัญหา (ไม่บังคับ - สูงสุด 5MB)</span>
                 </label>
-                <div class="border-2 border-dashed border-slate-800 hover:border-slate-700 rounded-xl p-4 text-center cursor-pointer relative bg-slate-950/40">
+                <div class="border-2 border-dashed border-slate-300 hover:border-blue-400 bg-slate-50/50 hover:bg-blue-50/20 rounded-2xl p-6 text-center cursor-pointer relative transition-all">
                     <input type="file" id="imageInput" name="image" accept="image/jpeg,image/png,image/webp" 
                            class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" onchange="previewImage(this)">
-                    <div id="uploadPrompt" class="space-y-1">
-                        <svg class="w-8 h-8 text-slate-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                        <p class="text-xs text-slate-400 font-medium">คลิกเพื่อเลือกไฟล์รูปภาพ หรือลากไฟล์มาวางที่นี่</p>
-                        <p class="text-[10px] text-slate-500">รองรับไฟล์ JPG, PNG, WEBP ขนาดไม่เกิน 5MB</p>
+                    <div id="uploadPrompt" class="space-y-1.5">
+                        <i class="fa-solid fa-cloud-arrow-up text-3xl text-blue-500 mx-auto"></i>
+                        <p class="text-xs text-slate-700 font-medium">คลิกเพื่อเลือกไฟล์รูปภาพ หรือลากไฟล์มาวางที่นี่</p>
+                        <p class="text-[11px] text-slate-400">รองรับไฟล์ JPG, PNG, WEBP ขนาดไม่เกิน 5MB</p>
                     </div>
-                    <img id="imagePreview" class="hidden mx-auto max-h-48 rounded-lg mt-2 object-contain shadow-md" alt="พรีวิวรูปภาพ">
+                    <img id="imagePreview" class="hidden mx-auto max-h-52 rounded-xl mt-3 object-contain shadow-sm border border-slate-200" alt="พรีวิวรูปภาพ">
                 </div>
             </div>
 
             <div class="pt-3">
-                <button type="submit" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-blue-600/30 transition-all flex items-center justify-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                    ยืนยันการเปิดตั๋วแจ้งซ่อม
+                <button type="submit" class="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl shadow-md shadow-blue-500/25 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                    <span>ยืนยันการเปิดตั๋วแจ้งซ่อม</span>
                 </button>
             </div>
         </form>

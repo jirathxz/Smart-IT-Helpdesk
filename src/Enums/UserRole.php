@@ -20,9 +20,9 @@ enum UserRole: string
     public function badgeColor(): string
     {
         return match ($this) {
-            self::USER => 'bg-blue-500/20 text-blue-400 border-blue-500/30',
-            self::TECHNICIAN => 'bg-amber-500/20 text-amber-400 border-amber-500/30',
-            self::ADMIN => 'bg-rose-500/20 text-rose-400 border-rose-500/30',
+            self::USER => 'bg-blue-50 text-blue-700 border-blue-200',
+            self::TECHNICIAN => 'bg-amber-50 text-amber-700 border-amber-200',
+            self::ADMIN => 'bg-purple-50 text-purple-700 border-purple-200',
         };
     }
 }

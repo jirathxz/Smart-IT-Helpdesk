@@ -5,49 +5,56 @@ use App\Enums\UserRole;
 $currentUser = Auth::user();
 $roleEnum = $currentUser ? UserRole::tryFrom($currentUser['role']) : null;
 ?>
-<header class="h-16 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-6">
-    <div class="flex items-center gap-4">
-        <button id="sidebarToggle" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+<header class="h-16 border-b border-slate-200 bg-white/90 backdrop-blur-md sticky top-0 z-40 flex items-center justify-between px-4 sm:px-6 shadow-sm">
+    <div class="flex items-center gap-3 sm:gap-4">
+        <button id="sidebarToggle" class="lg:hidden p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none" aria-label="เปิดเมนู">
+            <i class="fa-solid fa-bars text-lg"></i>
         </button>
         <div class="flex items-center gap-3">
-            <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center shadow-lg shadow-blue-500/25">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-md shadow-blue-500/25">
+                <i class="fa-solid fa-headset text-base"></i>
             </div>
             <div>
-                <span class="font-bold text-base tracking-tight text-white flex items-center gap-2">
+                <span class="font-bold text-base tracking-tight text-slate-900 flex items-center gap-2">
                     Smart IT Helpdesk
-                    <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20 font-semibold uppercase tracking-wider">OOP Edition</span>
+                    <span class="hidden sm:inline-flex text-[10px] px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-semibold uppercase tracking-wider">OOP Edition</span>
                 </span>
             </div>
         </div>
     </div>
 
-    <div class="flex items-center gap-3">
+    <div class="flex items-center gap-2 sm:gap-3">
         <?php if ($currentUser): ?>
             <!-- Current User Info -->
-            <div class="hidden sm:flex items-center gap-3 pr-3 border-r border-slate-800">
+            <div class="hidden sm:flex items-center gap-3 pr-3 border-r border-slate-200">
                 <div class="text-right">
-                    <div class="text-sm font-semibold text-white leading-tight"><?= htmlspecialchars($currentUser['name']) ?></div>
-                    <div class="text-xs text-slate-400"><?= htmlspecialchars($currentUser['email']) ?></div>
+                    <div class="text-xs sm:text-sm font-semibold text-slate-900 leading-tight"><?= htmlspecialchars($currentUser['name']) ?></div>
+                    <div class="text-[11px] text-slate-500"><?= htmlspecialchars($currentUser['email']) ?></div>
                 </div>
-                <span class="px-2.5 py-1 text-xs font-semibold rounded-full border <?= $roleEnum ? $roleEnum->badgeColor() : 'bg-slate-800 text-slate-300' ?>">
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-full border <?= $roleEnum ? $roleEnum->badgeColor() : 'bg-slate-100 text-slate-700 border-slate-200' ?>">
+                    <?php if ($currentUser['role'] === 'admin'): ?>
+                        <i class="fa-solid fa-shield-halved text-[10px]"></i>
+                    <?php elseif ($currentUser['role'] === 'technician'): ?>
+                        <i class="fa-solid fa-wrench text-[10px]"></i>
+                    <?php else: ?>
+                        <i class="fa-solid fa-user text-[10px]"></i>
+                    <?php endif; ?>
                     <?= $roleEnum ? $roleEnum->label() : htmlspecialchars($currentUser['role']) ?>
                 </span>
             </div>
 
             <!-- New Ticket Quick Button -->
-            <a href="/tickets/create" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-md shadow-blue-600/30 transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                <span>แจ้งซ่อม</span>
+            <a href="/tickets/create" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold shadow-sm shadow-blue-600/25 transition-all">
+                <i class="fa-solid fa-plus text-xs"></i>
+                <span class="hidden xs:inline">แจ้งซ่อม</span>
             </a>
 
             <!-- Logout Button -->
-            <a href="/logout" title="ออกจากระบบ" class="p-2 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <a href="/logout" title="ออกจากระบบ" class="p-2 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors">
+                <i class="fa-solid fa-arrow-right-from-bracket text-sm"></i>
             </a>
         <?php else: ?>
-            <a href="/login" class="text-xs text-slate-300 hover:text-white px-3 py-1.5 rounded-lg bg-slate-800">เข้าสู่ระบบ</a>
+            <a href="/login" class="text-xs font-medium text-slate-700 hover:text-blue-600 px-3 py-1.5 rounded-xl border border-slate-200 hover:border-blue-200 hover:bg-blue-50 transition-all">เข้าสู่ระบบ</a>
         <?php endif; ?>
     </div>
 </header>

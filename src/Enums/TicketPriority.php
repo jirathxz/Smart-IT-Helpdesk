@@ -22,10 +22,10 @@ enum TicketPriority: string
     public function badgeClasses(): string
     {
         return match ($this) {
-            self::LOW => 'bg-slate-500/20 text-slate-300 border-slate-500/30',
-            self::MEDIUM => 'bg-blue-500/20 text-blue-300 border-blue-500/30',
-            self::HIGH => 'bg-amber-500/20 text-amber-300 border-amber-500/30',
-            self::URGENT => 'bg-rose-500/20 text-rose-300 border-rose-500/30 animate-pulse',
+            self::LOW => 'bg-slate-100 text-slate-700 border-slate-200',
+            self::MEDIUM => 'bg-blue-50 text-blue-700 border-blue-200',
+            self::HIGH => 'bg-amber-50 text-amber-700 border-amber-200',
+            self::URGENT => 'bg-rose-50 text-rose-700 border-rose-200 font-bold',
         };
     }
 }
