@@ -68,13 +68,31 @@ $router->get('/', function () {
     exit;
 });
 
-// --- Ticket Routes (Authenticated Users) ---
-$router->get('/tickets', [\App\Controllers\TicketController::class, 'index'], [$authMw]);
-$router->get('/tickets/create', [\App\Controllers\TicketController::class, 'create'], [$authMw]);
-$router->post('/tickets', [\App\Controllers\TicketController::class, 'store'], [$authMw, $csrfMw]);
-$router->get('/tickets/{id}', [\App\Controllers\TicketController::class, 'show'], [$authMw]);
-$router->post('/tickets/{id}/status', [\App\Controllers\TicketController::class, 'updateStatus'], [$authMw, $csrfMw]);
-$router->post('/tickets/{id}/comment', [\App\Controllers\TicketController::class, 'addComment'], [$authMw, $csrfMw]);
+// --- Ticket Routes (Assigned to Developer 1 - Ticket Lifecycle & Operations) ---
+// Note: When Developer 1 merges their code, TicketController will automatically handle these routes with zero conflicts.
+if (class_exists(\App\Controllers\TicketController::class)) {
+    $router->get('/tickets', [\App\Controllers\TicketController::class, 'index'], [$authMw]);
+    $router->get('/tickets/create', [\App\Controllers\TicketController::class, 'create'], [$authMw]);
+    $router->post('/tickets', [\App\Controllers\TicketController::class, 'store'], [$authMw, $csrfMw]);
+    $router->get('/tickets/{id}', [\App\Controllers\TicketController::class, 'show'], [$authMw]);
+    $router->post('/tickets/{id}/status', [\App\Controllers\TicketController::class, 'updateStatus'], [$authMw, $csrfMw]);
+    $router->post('/tickets/{id}/comment', [\App\Controllers\TicketController::class, 'addComment'], [$authMw, $csrfMw]);
+} else {
+    // Waiting for Developer 1 implementation to be merged
+    $pendingDev1Handler = function () {
+        $anonymousController = new class extends \App\Controllers\Controller {
+            public function displayPending(): void {
+                $this->render('placeholder/dev1_pending', [
+                    'title' => 'รอการผสานโค้ดจาก Developer 1 - Smart IT Helpdesk',
+                ]);
+            }
+        };
+        $anonymousController->displayPending();
+    };
+    $router->get('/tickets', $pendingDev1Handler, [$authMw]);
+    $router->get('/tickets/create', $pendingDev1Handler, [$authMw]);
+    $router->get('/tickets/{id}', $pendingDev1Handler, [$authMw]);
+}
 
 // --- Admin Routes ---
 $router->get('/admin/dashboard', [\App\Controllers\AdminController::class, 'dashboard'], [$adminMw]);

@@ -1,8 +1,12 @@
 <?php
-use App\Enums\TicketPriority;
-use App\Enums\TicketStatus;
-
 $sc = $stats['status_counts'];
+
+$priorityBadges = [
+    'urgent' => ['label' => 'เร่งด่วนที่สุด', 'class' => 'bg-rose-50 text-rose-700 border-rose-200'],
+    'high'   => ['label' => 'สูง', 'class' => 'bg-amber-50 text-amber-700 border-amber-200'],
+    'medium' => ['label' => 'ปานกลาง', 'class' => 'bg-sky-50 text-sky-700 border-sky-200'],
+    'low'    => ['label' => 'ต่ำ', 'class' => 'bg-slate-100 text-slate-600 border-slate-200'],
+];
 ?>
 
 <div class="space-y-6 sm:space-y-8">
@@ -116,14 +120,14 @@ $sc = $stats['status_counts'];
             </div>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3.5">
                 <?php foreach ($unassignedTickets as $ticket): 
-                    $pEnum = TicketPriority::tryFrom($ticket['priority']);
+                    $pInfo = $priorityBadges[$ticket['priority']] ?? ['label' => $ticket['priority'], 'class' => 'bg-slate-100 text-slate-700 border-slate-200'];
                 ?>
                     <div class="p-4 rounded-xl bg-white border border-slate-200 shadow-xs flex flex-col justify-between space-y-3 hover:border-slate-300 transition-all">
                         <div>
                             <div class="flex items-center justify-between gap-2 mb-1.5">
                                 <span class="text-xs font-mono text-slate-400 font-semibold">#<?= $ticket['id'] ?></span>
-                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold border <?= $pEnum ? $pEnum->badgeClasses() : 'bg-slate-100 text-slate-700 border-slate-200' ?>">
-                                    <?= $pEnum ? $pEnum->label() : $ticket['priority'] ?>
+                                <span class="text-[10px] px-2 py-0.5 rounded-full font-semibold border <?= $pInfo['class'] ?>">
+                                    <?= $pInfo['label'] ?>
                                 </span>
                             </div>
                             <h3 class="font-bold text-sm text-slate-900 line-clamp-1"><?= htmlspecialchars($ticket['title']) ?></h3>
