@@ -33,8 +33,26 @@ class AdminController extends Controller
      */
     public function dashboard(): void
     {
-        $stats = $this->dashboardService->getStatistics();
+        $period = $_GET['period'] ?? 'all';
+        $validPeriods = ['all', 'today', 'week', 'month', 'year'];
+        if (!in_array($period, $validPeriods, true)) {
+            $period = 'all';
+        }
+
+        $stats = $this->dashboardService->getStatistics($period);
         $technicians = $this->userRepo->findTechnicians();
+
+        // Support AJAX JSON response for Vanilla JS dynamic switching
+        if (isset($_GET['ajax'])) {
+            header('Content-Type: application/json');
+            echo json_encode([
+                'success'       => true,
+                'period'        => $period,
+                'period_label'  => \App\Services\DashboardService::getPeriodLabel($period),
+                'stats'         => $stats,
+            ]);
+            exit;
+        }
 
         // Get unassigned tickets for quick assignment widget
         $unassignedTickets = $this->db->fetchAll(
@@ -49,6 +67,7 @@ class AdminController extends Controller
         $this->render('admin/dashboard', [
             'title'             => 'Executive Dashboard - Smart IT Helpdesk',
             'stats'             => $stats,
+            'currentPeriod'     => $period,
             'technicians'       => $technicians,
             'unassignedTickets' => $unassignedTickets,
         ]);

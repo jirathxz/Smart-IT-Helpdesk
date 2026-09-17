@@ -144,3 +144,8 @@ INSERT INTO `status_logs` (`id`, `ticket_id`, `changed_by`, `from_status`, `to_s
 (4, 4, 1, 'open', 'assigned', 'มอบหมายงานให้ช่างวิชัย', DATE_SUB(NOW(), INTERVAL 3 DAY)),
 (5, 4, 3, 'assigned', 'in_progress', 'ช่างวิชัยเริ่มงานเปลี่ยนอะไหล่', DATE_SUB(NOW(), INTERVAL 2 DAY)),
 (6, 4, 3, 'in_progress', 'resolved', 'ซ่อมเสร็จสิ้น เปลี่ยนเซ็นเซอร์แล้ว', DATE_SUB(NOW(), INTERVAL 1 DAY));
+
+-- Sample Ratings
+INSERT INTO `ratings` (`id`, `ticket_id`, `score`, `feedback`, `created_at`) VALUES
+(1, 4, 5, 'ช่างวิชัยบริการดีมาก ซ่อมเสร็จเร็วและให้คำแนะนำอย่างชัดเจนครับ', DATE_SUB(NOW(), INTERVAL 1 DAY));
+
