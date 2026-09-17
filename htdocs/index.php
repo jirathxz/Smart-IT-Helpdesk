@@ -94,9 +94,16 @@ if (class_exists(\App\Controllers\TicketController::class)) {
     $router->get('/tickets/{id}', $pendingDev1Handler, [$authMw]);
 }
 
+// --- User Profile Routes ---
+$router->get('/profile', [\App\Controllers\ProfileController::class, 'show'], [$authMw]);
+$router->post('/profile', [\App\Controllers\ProfileController::class, 'update'], [$authMw, $csrfMw]);
+$router->post('/profile/password', [\App\Controllers\ProfileController::class, 'updatePassword'], [$authMw, $csrfMw]);
+
 // --- Admin Routes ---
 $router->get('/admin/dashboard', [\App\Controllers\AdminController::class, 'dashboard'], [$adminMw]);
 $router->post('/admin/tickets/{id}/assign', [\App\Controllers\AdminController::class, 'assignTicket'], [$adminMw, $csrfMw]);
+$router->post('/admin/tickets/{id}/auto-assign', [\App\Controllers\AdminController::class, 'autoAssignTicket'], [$adminMw, $csrfMw]);
+$router->post('/admin/tickets/auto-assign-all', [\App\Controllers\AdminController::class, 'autoAssignAll'], [$adminMw, $csrfMw]);
 $router->get('/admin/users', [\App\Controllers\AdminController::class, 'users'], [$adminMw]);
 $router->post('/admin/users', [\App\Controllers\AdminController::class, 'storeUser'], [$adminMw, $csrfMw]);
 $router->post('/admin/users/{id}/delete', [\App\Controllers\AdminController::class, 'deleteUser'], [$adminMw, $csrfMw]);

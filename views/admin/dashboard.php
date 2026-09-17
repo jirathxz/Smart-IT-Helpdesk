@@ -388,15 +388,26 @@ $statusDots = [
 
             <!-- Section 2: Recent Tickets Feed & Operational Queue -->
             <div class="bg-white border border-slate-200 rounded-lg overflow-hidden shadow-2xs">
-                <div class="px-4 py-3 border-b border-slate-200 flex items-center justify-between">
+                <div class="px-4 py-3 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
                     <div>
                         <h2 class="text-xs font-semibold text-slate-900 uppercase tracking-wider">Recent tickets</h2>
                         <span class="text-[11px] text-slate-500">ตั๋วงานล่าสุดที่ต้องได้รับการตรวจสอบหรือจ่ายงาน</span>
                     </div>
-                    <a href="/tickets" class="text-xs font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1">
-                        <span>View all</span>
-                        <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
-                    </a>
+                    <div class="flex items-center gap-2">
+                        <?php if (($summary['open'] ?? 0) > 0): ?>
+                            <form action="/admin/tickets/auto-assign-all" method="POST" onsubmit="return confirm('ต้องการจ่ายงานอัตโนมัติให้ตั๋วที่ค้างอยู่ทั้งหมด (<?= $summary['open'] ?> งาน) หรือไม่? ระบบจะวิเคราะห์ความเชี่ยวชาญและเกลี่ยภาระงานช่างให้อัตโนมัติ');" class="inline">
+                                <?= \App\Core\Csrf::field() ?>
+                                <button type="submit" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-[11px] font-medium text-blue-700 bg-blue-50 border border-blue-200 rounded-md hover:bg-blue-100 transition-colors shadow-2xs">
+                                    <i class="fa-solid fa-bolt-lightning text-blue-600 text-[10px]" aria-hidden="true"></i>
+                                    <span>จ่ายงาน Auto ทั้งหมด (<?= $summary['open'] ?>)</span>
+                                </button>
+                            </form>
+                        <?php endif; ?>
+                        <a href="/tickets" class="text-xs font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1 px-1.5 py-1">
+                            <span>View all</span>
+                            <i class="fa-solid fa-arrow-right text-[10px]" aria-hidden="true"></i>
+                        </a>
+                    </div>
                 </div>
 
                 <div class="divide-y divide-slate-100">
@@ -429,19 +440,28 @@ $statusDots = [
                                 <!-- Inline Actions & Status Badge -->
                                 <div class="flex items-center gap-2.5 shrink-0">
                                     <?php if ($ticket['status'] === 'open'): ?>
-                                        <form action="/admin/tickets/<?= $ticket['id'] ?>/assign" method="POST" class="flex items-center gap-1.5">
-                                            <?= \App\Core\Csrf::field() ?>
-                                            <label for="tech_select_<?= $ticket['id'] ?>" class="sr-only">เลือกช่าง</label>
-                                            <select id="tech_select_<?= $ticket['id'] ?>" name="technician_id" required class="bg-white border border-slate-200 text-[11px] rounded-md px-2 py-1 text-slate-700 focus:outline-none focus:border-blue-600">
-                                                <option value="">เลือกช่าง...</option>
-                                                <?php foreach ($technicians as $tech): ?>
-                                                    <option value="<?= $tech['id'] ?>"><?= htmlspecialchars($tech['name']) ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                            <button type="submit" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-medium rounded-md transition-colors">
-                                                จ่ายงาน
-                                            </button>
-                                        </form>
+                                        <div class="flex items-center gap-1.5">
+                                            <form action="/admin/tickets/<?= $ticket['id'] ?>/auto-assign" method="POST" class="inline">
+                                                <?= \App\Core\Csrf::field() ?>
+                                                <button type="submit" title="จ่ายงานอัตโนมัติตามความเชี่ยวชาญและภาระงานช่าง" class="inline-flex items-center gap-1 px-2 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 text-[11px] font-medium rounded-md transition-colors shadow-2xs">
+                                                    <i class="fa-solid fa-bolt-lightning text-[10px]" aria-hidden="true"></i>
+                                                    <span>Auto</span>
+                                                </button>
+                                            </form>
+                                            <form action="/admin/tickets/<?= $ticket['id'] ?>/assign" method="POST" class="flex items-center gap-1">
+                                                <?= \App\Core\Csrf::field() ?>
+                                                <label for="tech_select_<?= $ticket['id'] ?>" class="sr-only">เลือกช่าง</label>
+                                                <select id="tech_select_<?= $ticket['id'] ?>" name="technician_id" required class="bg-white border border-slate-200 text-[11px] rounded-md px-2 py-1 text-slate-700 focus:outline-none focus:border-blue-600">
+                                                    <option value="">เลือกช่าง...</option>
+                                                    <?php foreach ($technicians as $tech): ?>
+                                                        <option value="<?= $tech['id'] ?>"><?= htmlspecialchars($tech['name']) ?></option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                                <button type="submit" class="px-2.5 py-1 bg-slate-900 hover:bg-slate-800 text-white text-[11px] font-medium rounded-md transition-colors">
+                                                    จ่ายงาน
+                                                </button>
+                                            </form>
+                                        </div>
                                     <?php else: ?>
                                         <div class="text-right text-[11px]">
                                             <span class="text-slate-400">ช่าง:</span>

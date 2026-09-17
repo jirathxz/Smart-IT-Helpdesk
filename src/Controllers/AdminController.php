@@ -128,6 +128,41 @@ class AdminController extends Controller
     }
 
     /**
+     * Smart Auto-Assign for a single ticket
+     */
+    public function autoAssignTicket(int $ticketId): void
+    {
+        try {
+            $service = new \App\Services\AutoAssignService($this->db, $this->userRepo);
+            $result = $service->assignTicket($ticketId, Auth::id());
+            $this->redirect(
+                '/admin/dashboard',
+                "⚡ จ่ายงานอัตโนมัติสำเร็จ: มอบหมายให้ {$result['technician_name']} ({$result['reason']})"
+            );
+        } catch (\Exception $e) {
+            $this->redirect('/admin/dashboard', null, "ไม่สามารถจ่ายงานอัตโนมัติได้: " . $e->getMessage());
+        }
+    }
+
+    /**
+     * Smart Batch Auto-Assign for all open tickets
+     */
+    public function autoAssignAll(): void
+    {
+        try {
+            $service = new \App\Services\AutoAssignService($this->db, $this->userRepo);
+            $result = $service->assignAllOpenTickets(Auth::id());
+            if ($result['assigned'] > 0) {
+                $this->redirect('/admin/dashboard', "⚡ " . $result['summary_text']);
+            } else {
+                $this->redirect('/admin/dashboard', null, $result['summary_text']);
+            }
+        } catch (\Exception $e) {
+            $this->redirect('/admin/dashboard', null, "เกิดข้อผิดพลาดในการกระจายงานอัตโนมัติ: " . $e->getMessage());
+        }
+    }
+
+    /**
      * User Management
      */
     public function users(): void
