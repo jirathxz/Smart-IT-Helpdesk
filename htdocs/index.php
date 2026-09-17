@@ -77,6 +77,8 @@ if (class_exists(\App\Controllers\TicketController::class)) {
     $router->get('/tickets/{id}', [\App\Controllers\TicketController::class, 'show'], [$authMw]);
     $router->post('/tickets/{id}/status', [\App\Controllers\TicketController::class, 'updateStatus'], [$authMw, $csrfMw]);
     $router->post('/tickets/{id}/comment', [\App\Controllers\TicketController::class, 'addComment'], [$authMw, $csrfMw]);
+    $router->post('/tickets/{id}/comments', [\App\Controllers\TicketController::class, 'addComment'], [$authMw, $csrfMw]);
+    $router->post('/tickets/{id}/rate', [\App\Controllers\TicketController::class, 'rate'], [$authMw, $csrfMw]);
 } else {
     // Waiting for Developer 1 implementation to be merged
     $pendingDev1Handler = function () {

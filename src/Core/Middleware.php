@@ -50,7 +50,7 @@ class Middleware
     {
         $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
         if (in_array(strtoupper($method), ['POST', 'PUT', 'PATCH', 'DELETE'], true)) {
-            $token = $_POST['_csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
+            $token = $_POST['_csrf_token'] ?? $_POST['csrf_token'] ?? $_SERVER['HTTP_X_CSRF_TOKEN'] ?? null;
             if (!Csrf::validate($token)) {
                 http_response_code(419);
                 die("419 Page Expired: CSRF Token ไม่ถูกต้องหรือไม่พบ กรุณารีเฟรชหน้าเว็บและลองใหม่");

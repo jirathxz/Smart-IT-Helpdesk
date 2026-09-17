@@ -12,13 +12,14 @@ abstract class Controller
      */
     protected function render(string $view, array $data = [], string $layout = 'main'): void
     {
-        extract($data);
         $viewsDir = dirname(__DIR__, 2) . '/views';
         $viewFile = "{$viewsDir}/{$view}.php";
 
         if (!file_exists($viewFile)) {
             die("Error: View [{$view}] not found at {$viewFile}");
         }
+
+        extract($data, EXTR_SKIP);
 
         // Capture view content
         ob_start();
