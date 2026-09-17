@@ -80,7 +80,7 @@ CREATE TABLE `status_logs` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `ticket_id` INT NOT NULL,
     `changed_by` INT NOT NULL,
-    `from_status` ENUM('open', 'assigned', 'in_progress', 'resolved', 'closed') NOT NULL,
+    `from_status` ENUM('none', 'open', 'assigned', 'in_progress', 'resolved', 'closed') NOT NULL,
     `to_status` ENUM('open', 'assigned', 'in_progress', 'resolved', 'closed') NOT NULL,
     `note` TEXT NULL,
     `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
