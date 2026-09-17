@@ -13,12 +13,47 @@
 *Mini Project รายวิชา: การออกแบบและพัฒนาเว็บขั้นสูง (Advanced Web Design and Development)*  
 สาขาวิชาเทคโนโลยีสารสนเทศ | สถาปัตยกรรม **Custom OOP PHP (No Framework)** ตามมาตรฐาน **PSR-4**
 
+[ภาพตัวอย่างระบบ](#-ภาพตัวอย่างระบบ-system-previews) •
 [สถาปัตยกรรมระบบ](#-สถาปัตยกรรมระบบ-system-architecture) •
 [การแบ่งงาน 2 คน](#-แผนการแบ่งงานสำหรับ-developer-2-คน-5050-balanced-workload) •
 [โครงสร้างฐานข้อมูล](#-โครงสร้างฐานข้อมูล-database-schema) •
 [State Machine](#-ticket-state-machine--business-rules) •
 [วิธีติดตั้งและใช้งาน](#-ขั้นตอนการติดตั้งและเริ่มใช้งาน-getting-started) •
 [คู่มือ Merge สำหรับ Dev 1](#-คู่มือและแนวทางการ-merge-ระบบสำหรับ-developer-1-developer-1-merge-guide)
+
+</div>
+
+---
+
+## 🖼️ ภาพตัวอย่างระบบ (System Previews)
+
+<div align="center">
+
+### 1. Executive Analytics & Operational Queue (Admin Dashboard)
+หน้าสรุปภาพรวมผู้บริหาร พร้อม 6 Core KPIs, แถบสุขภาพระบบ (Executive Health Summary), อัตราการระบายงาน (Intake vs Clearance), กราฟเปรียบเทียบช่าง และปุ่มจ่ายงาน Auto อัจฉริยะ
+
+![Executive Dashboard](docs/screenshots/02_executive_dashboard.png)
+
+<br>
+
+| 2. หน้ารายการคิวงานแจ้งซ่อม (Tickets Queue) | 3. หน้าเปิดตั๋วแจ้งซ่อมใหม่ (Create Ticket) |
+| :---: | :---: |
+| ![Tickets Queue](docs/screenshots/03_tickets_queue.png) | ![Create Ticket](docs/screenshots/04_create_ticket.png) |
+| *แสดงคิวงาน แยกแท็บสถานะ ตารางค้นหา และตัวกรอง* | *ฟอร์มแจ้งซ่อม ระบุหมวดหมู่ ระดับความเร่งด่วน และแนบภาพ* |
+
+<br>
+
+| 4. หน้ารายละเอียดงานซ่อม & Timeline (Ticket Detail) | 5. หน้าโปรไฟล์ผู้ใช้ & ความปลอดภัย (User Profile) |
+| :---: | :---: |
+| ![Ticket Detail](docs/screenshots/05_ticket_detail.png) | ![User Profile](docs/screenshots/06_user_profile.png) |
+| *Stepper Timeline ตรวจสอบสถานะ กล่องคอมเมนต์ และ Action Modals* | *จัดการข้อมูลส่วนตัว, เชื่อมต่อ LINE User ID และเปลี่ยนรหัสผ่าน* |
+
+<br>
+
+### 6. หน้าเข้าสู่ระบบ (Authentication & Brand Identity)
+หน้าจอเข้าสู่ระบบที่ออกแบบอย่างประณีต ขจัด AI Slop ด้วย Pure Typographic Branding
+
+![Login Page](docs/screenshots/01_login.png)
 
 </div>
 
