@@ -32,13 +32,15 @@
 </head>
 <body class="bg-slate-100/70 text-slate-800 min-h-screen flex flex-col justify-center items-center p-4 sm:p-6 selection:bg-blue-600 selection:text-white">
     <div class="w-full max-w-md my-auto">
-        <!-- Logo & Header -->
+        <!-- Brand Wordmark Header -->
         <div class="text-center mb-6">
-            <div class="inline-flex w-12 h-12 rounded-2xl bg-blue-600 items-center justify-center shadow-md shadow-blue-500/25 mb-3 text-white">
-                <i class="fa-solid fa-headset text-xl" aria-hidden="true"></i>
+            <div class="inline-flex items-baseline tracking-tight font-sans select-none mb-1">
+                <span class="text-3xl sm:text-4xl font-bold text-slate-900">Smart</span>
+                <span class="text-3xl sm:text-4xl font-black text-blue-600 tracking-tighter ml-0.5">IT</span>
+                <span class="text-xl sm:text-2xl font-medium text-slate-500 ml-2">Helpdesk</span>
+                <span class="w-2 h-2 rounded-full bg-blue-600 ml-1.5 mb-1 inline-block"></span>
             </div>
-            <h1 class="text-2xl font-bold tracking-tight text-slate-900">Smart IT Helpdesk</h1>
-            <p class="text-xs text-slate-500 mt-1">ระบบแจ้งซ่อมและบริหารจัดการงานบริการเทคโนโลยีสารสนเทศ</p>
+            <p class="text-xs text-slate-500 mt-1 font-normal">ระบบบริหารจัดการและติดตามงานบริการเทคโนโลยีสารสนเทศ</p>
         </div>
 
         <!-- Flash Alerts -->

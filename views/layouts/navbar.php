@@ -10,16 +10,16 @@ $roleEnum = $currentUser ? UserRole::tryFrom($currentUser['role']) : null;
         <button id="sidebarToggle" class="lg:hidden min-w-[44px] min-h-[44px] inline-flex items-center justify-center rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1 transition-colors" aria-label="เปิดเมนูนำทาง">
             <i class="fa-solid fa-bars text-lg" aria-hidden="true"></i>
         </button>
-        <a href="/" class="flex items-center gap-3 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-xl">
-            <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center shadow-sm shadow-blue-500/25 group-hover:bg-blue-700 transition-colors">
-                <i class="fa-solid fa-headset text-base" aria-hidden="true"></i>
+        <a href="/" class="flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 rounded-lg py-1 px-1.5 -ml-1.5 transition-colors">
+            <div class="flex items-baseline tracking-tight font-sans select-none">
+                <span class="text-lg sm:text-xl font-bold text-slate-900 group-hover:text-slate-950 transition-colors">Smart</span>
+                <span class="text-lg sm:text-xl font-black text-blue-600 tracking-tighter ml-0.5">IT</span>
+                <span class="text-sm sm:text-base font-medium text-slate-500 ml-1.5 tracking-normal">Helpdesk</span>
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 ml-1 mb-0.5 inline-block"></span>
             </div>
-            <div class="flex items-center gap-2">
-                <span class="font-bold text-base tracking-tight text-slate-900">
-                    Smart IT Helpdesk
-                </span>
-                <span class="hidden md:inline-flex text-[11px] px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200 font-medium">Service Portal</span>
-            </div>
+            <span class="hidden md:inline-flex text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200/80 font-semibold ml-1">
+                Portal
+            </span>
         </a>
     </div>
 
